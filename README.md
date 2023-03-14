@@ -28,6 +28,9 @@ Here are some experimental results on large-scale datasets.
 ### Recall rates on the benchmark dataset
 ![KITTI](imgs/benchmark_dataset.png)
 
+### Some samples on KITTI
+![KITTI](imgs/samples.png)
+
 # Change Log
 - 2023-03-14: intial version
 
