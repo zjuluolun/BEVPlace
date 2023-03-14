@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import pcl
 import cv2
 import os
-
+import argparse
 
 parser = argparse.ArgumentParser(description='BEVPlace-Gen-BEV-Images')
 parser.add_argument('--seq_path', type=str, default="./KITTI05/", help='path to data')
