@@ -12,7 +12,7 @@ import faiss
 from network.bevplace import BEVPlace
 from tqdm import tqdm
 
-os.environ["CUDA_VISIBLE_DEVICES"] = "2"
+os.environ["CUDA_VISIBLE_DEVICES"] = "0"
 
 parser = argparse.ArgumentParser(description='BEVPlace')
 parser.add_argument('--test_batch_size', type=int, default=128, help='Batch size for testing')
