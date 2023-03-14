@@ -1,0 +1,6 @@
+faiss-gpu
+numpy
+opencv-python
+scikit-image
+scikit-learn
+tqdm
