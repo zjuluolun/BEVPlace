@@ -38,7 +38,7 @@ Here are some experimental results on large-scale datasets.
 ```
 @article{luo2023,
   title={{BEVPlace}: {Learning LiDAR-based} Place Recognition using Bird's Eye View Images},
-  author={Lun, Luo and Shuhang, Zheng and Yixuan, Li and Yongzhi, Fan and Beinan, Yu and Siyuan Cao and Hui-Liang Shen},
+  author={Lun, Luo and Shuhang, Zheng and Yixuan, Li and Yongzhi, Fan and Beinan, Yu and Siyuan, Cao and Hui-Liang, Shen},
   journal={arXiv preprint arXiv:2302.14325},
   year={2023}
 }
