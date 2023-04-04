@@ -1,7 +1,7 @@
 # BEVPlace: Learning LiDAR-based Place Recognition using Bird's Eye View Images
-BEVPlace is a LiDAR-based place recognition method. It projects point clouds into BEV images and generate global feature with a group invariant network and the NetVLAD. Experiments demonstrate that BEVPlace significantly outperforms state-of-the-art (SOTA) methods, and it is able to generalize to previously unseen environments with little performance degradation. In addition, it can estimate postition of query point clouds by feature distance mapping. BEVPlace will certainly benefit various applications, including loop closure detection, global localization, and SLAM. Please feel free to use and enjoy it!
+BEVPlace is a LiDAR-based place recognition method. It projects point clouds into Bird's-eye View (BEV) images and generate global feature with a group invariant network and the NetVLAD. Experiments show that BEVPlace significantly outperforms the state-of-the-art (SOTA) methods and generalizes well to previously unseen environments with little performance degradation. In addition, it can estimate postition of query point clouds by feature distance mapping. BEVPlace will certainly benefit various applications, including loop closure detection, global localization, and SLAM. Please feel free to use and enjoy it!
 
-
+> https://doi.org/10.48550/arXiv.2302.14325
 
 # Quick Start
 
