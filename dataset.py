@@ -91,7 +91,7 @@ class KITTIDataset(data.Dataset):
         return self.positives
         
 class YuQuanDataset(data.Dataset):
-    def __init__(self, data_path='/home/luolun/gift-netvlad-kitti-test-release/data/YuQuan/'):
+    def __init__(self, data_path):
         super().__init__()
 
         #protocol setting
