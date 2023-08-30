@@ -10,6 +10,8 @@ import torch.nn as nn
 from torch.utils.data import DataLoader
 import faiss
 from network.bevplace import BEVPlace
+from network.utils import to_cuda
+
 from tqdm import tqdm
 
 os.environ["CUDA_VISIBLE_DEVICES"] = "0"
@@ -34,9 +36,10 @@ def evaluate(eval_set, model):
         print('====> Extracting Features')
         with tqdm(total=len(test_data_loader)) as t:
             for iteration, (input, indices) in enumerate(test_data_loader, 1):
-                batch_feature = bevplace(input)
+                if cuda:
+                    input = to_cuda(input)
+                batch_feature = model(input)
                 global_features.append(batch_feature.detach().cpu().numpy())
-
                 t.update(1)
 
     global_features = np.vstack(global_features)
@@ -67,7 +70,7 @@ def evaluate(eval_set, model):
                 correct_at_n[i:] += 1
                 break
     recall_at_n = correct_at_n / whole_test_size
-
+    print("tp+fn=%d"%(whole_test_size))
     recalls = {} 
     for i,n in enumerate(n_values):
         recalls[n] = recall_at_n[i]
@@ -75,7 +78,10 @@ def evaluate(eval_set, model):
 
     return recalls
 
-import dataset
+import dataset as dataset
+
+from network import netvlad
+
 if __name__ == "__main__":
     opt = parser.parse_args()
 
@@ -92,19 +98,20 @@ if __name__ == "__main__":
     eval_set = dataset.KITTIDataset(data_path, seq)
      
     print('===> Building model')
-    bevplace = BEVPlace()
+    model = BEVPlace()
     resume_ckpt = join(opt.resume, 'checkpoint.pth.tar')
 
     print("=> loading checkpoint '{}'".format(resume_ckpt))
     checkpoint = torch.load(resume_ckpt, map_location=lambda storage, loc: storage)
-    bevplace.load_state_dict(checkpoint['state_dict'])
-    bevplace = bevplace.to(device)
+    model.load_state_dict(checkpoint['state_dict'],strict=False)
+    model = model.to(device)
     print("=> loaded checkpoint '{}' (epoch {})"
             .format(resume_ckpt, checkpoint['epoch']))
 
 
-    bevplace = nn.DataParallel(bevplace)
-    model = bevplace.to(device)
+    if cuda:
+        model = nn.DataParallel(model)
+        # model = model.to(device)
 
     recalls = evaluate(eval_set, model)
     
