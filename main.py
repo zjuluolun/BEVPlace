@@ -21,7 +21,7 @@ parser.add_argument('--test_batch_size', type=int, default=8, help='Batch size f
 parser.add_argument('--nGPU', type=int, default=2, help='number of GPU to use.')
 parser.add_argument('--nocuda', action='store_true', help='Dont use cuda')
 parser.add_argument('--threads', type=int, default=40, help='Number of threads for each data loader to use')
-parser.add_argument('--resume', type=str, default='checkpoints/checkpoint_custom_bev.pth.tar', help='Path to load checkpoint from, for resuming training or testing.')
+parser.add_argument('--resume', type=str, default='checkpoints/checkpoint_paper_kitti.pth', help='Path to load checkpoint from, for resuming training or testing.')
 
 
 def evaluate(eval_set, model):
@@ -70,11 +70,7 @@ def evaluate(eval_set, model):
                 correct_at_n[i:] += 1
                 break
     recall_at_n = correct_at_n / whole_test_size
-<<<<<<< Updated upstream
-    print("tp+fn=%d"%(whole_test_size))
-=======
     # print("tp+fn=%d"%(whole_test_size))
->>>>>>> Stashed changes
     recalls = {} 
     for i,n in enumerate(n_values):
         recalls[n] = recall_at_n[i]
@@ -97,11 +93,7 @@ if __name__ == "__main__":
      
     print('===> Building model')
     model = BEVPlace()
-<<<<<<< Updated upstream
-    resume_ckpt = join(opt.resume, 'checkpoint.pth.tar')
-=======
     resume_ckpt = opt.resume
->>>>>>> Stashed changes
 
     print("=> loading checkpoint '{}'".format(resume_ckpt))
     checkpoint = torch.load(resume_ckpt, map_location=lambda storage, loc: storage)

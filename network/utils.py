@@ -87,13 +87,8 @@ class TransformerCV:
         ssi = config.sample_scale_inter 
         ssn = config.sample_scale_num
 
-<<<<<<< Updated upstream
-        srb = config.sample_rotate_begin/180.0*np.pi
-        sri = config.sample_rotate_inter/180.0*np.pi
-=======
         srb = config.sample_rotate_begin/ 180 * np.pi
         sri = config.sample_rotate_inter/ 180 * np.pi
->>>>>>> Stashed changes
         srn = config.sample_rotate_num
 
         self.scales = [ssi ** (si + ssb) for si in range(ssn)]

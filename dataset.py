@@ -37,13 +37,8 @@ class KITTIDataset(data.Dataset):
         lidar_path = data_path+ '/'+seq+'/' + '/velodyne/'
 
         #geometry positions
-<<<<<<< Updated upstream
-        poses = np.loadtxt(data_path+'/pose.txt')
-        positions = np.hstack([poses[:,3].reshape(-1,1),  poses[:,11].reshape(-1,1)])
-=======
         poses = np.loadtxt(data_path+'/'+ seq+'/pose.txt')
         positions = np.hstack([poses[:,3].reshape(-1,1),  poses[:,7].reshape(-1,1)])
->>>>>>> Stashed changes
 
         self.db_positions = positions[db_frames[seq], :]
         self.query_positions = positions[query_frames[seq], :]
