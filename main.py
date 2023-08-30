@@ -21,7 +21,7 @@ parser.add_argument('--test_batch_size', type=int, default=8, help='Batch size f
 parser.add_argument('--nGPU', type=int, default=2, help='number of GPU to use.')
 parser.add_argument('--nocuda', action='store_true', help='Dont use cuda')
 parser.add_argument('--threads', type=int, default=40, help='Number of threads for each data loader to use')
-parser.add_argument('--resume', type=str, default='checkpoints/checkpoint_paper_kitti.pth', help='Path to load checkpoint from, for resuming training or testing.')
+parser.add_argument('--resume', type=str, default='checkpoints/checkpoint_paper_kitti.pth.tar', help='Path to load checkpoint from, for resuming training or testing.')
 
 
 def evaluate(eval_set, model):
