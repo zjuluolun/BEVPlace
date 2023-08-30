@@ -10,7 +10,7 @@ Create a conda environment and install pytorch according to you cuda version. Th
 pip install -r requirements.txt
 ```
 
-The data for seq. 05 of KITTI has been included in this repository. You can evaluate BEVPlace by simply running
+The data of KITTI has been included in this repository. You can evaluate BEVPlace by simply running
 ```
 python main.py
 ```
@@ -31,8 +31,11 @@ Here are some experimental results on large-scale datasets.
 ### Some samples on KITTI
 ![KITTI](imgs/samples.png)
 
-# Change Log
-- 2023-03-14: intial version
+# News
+- 2022-09-02: Our method won the 2nd place on the General Place Recognition Competetion in ICRA 2022 (The 1st place solution is based on ensemble learning)!
+- 2023-03-14: Intial version
+- 2023-07-14: Our paper is accepted by ICCV 2023!
+- 2023-08-31: Update the pre-trained weights and the bev dataset of KITTI for reproducing the numbers in the paper. 
 
 # Cite
 ```
