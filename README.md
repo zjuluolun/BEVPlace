@@ -32,10 +32,10 @@ Here are some experimental results on large-scale datasets.
 ![KITTI](imgs/samples.png)
 
 # News
-- 2022-09-02: Our method won the 2nd place on the General Place Recognition Competetion in ICRA 2022 (The 1st place solution is based on ensemble learning)!
-- 2023-03-14: Intial version
-- 2023-07-14: Our paper is accepted by ICCV 2023!
 - 2023-08-31: Update the pre-trained weights and the bev dataset of KITTI for reproducing the numbers in the paper. 
+- 2023-07-14: Our paper is accepted by ICCV 2023!
+- 2023-03-14: Intial version
+- 2022-09-02: Our method won the 2nd place on the General Place Recognition Competetion in ICRA 2022 (The 1st place solution is based on ensemble learning)!
 
 # Cite
 ```
