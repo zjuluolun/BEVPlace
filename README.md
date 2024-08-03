@@ -1,25 +1,28 @@
-# BEVPlace: Learning LiDAR-based Place Recognition using Bird's Eye View Images
-BEVPlace is a LiDAR-based place recognition method. It projects point clouds into Bird's-eye View (BEV) images and generate global feature with a group invariant network and the NetVLAD. Experiments show that BEVPlace significantly outperforms the state-of-the-art (SOTA) methods and generalizes well to previously unseen environments with little performance degradation. In addition, it can estimate postition of query point clouds by feature distance mapping. BEVPlace will certainly benefit various applications, including loop closure detection, global localization, and SLAM. Please feel free to use and enjoy it!
+# BEVPlace++: Fast, Robust, and Lightweight LiDAR Global Localization for Unmanned Ground Vehicles
+BEVPlace++ is a LiDAR-based global localization method. It projects point clouds into Bird's-eye View (BEV) images and generate global feature with a rotation equivariant module and the NetVLAD. It sequentially perform place recognition and pose estimation to achieve complete global localization. Experiments show that BEVPlace++ significantly outperforms the state-of-the-art (SOTA) methods and generalizes well to previously unseen environments. BEVPlace++ will certainly benefit various applications, including loop closure detection, global localization, and SLAM. Please feel free to use and enjoy it!
 
-> https://doi.org/10.48550/arXiv.2302.14325
+> paper comming soon...
 
 # Quick Start
 
-Create a conda environment and install pytorch according to you cuda version. Then install the dependencies by 
+1. Download the dataset from [google drive](https://drive.google.com/file/d/1-oNthUKg4ysrbZ_sEjiylON9w93KCUT5/view?usp=drive_link). Unzip and move the files into the "data" directory.
+
+2. Create a conda environment and install pytorch according to you cuda version. Then install the dependencies by 
 ```
 pip install -r requirements.txt
 ```
 
-The data of KITTI has been included in this repository. You can evaluate BEVPlace by simply running
+3. You can train and evaluate BEVPlace++ by simply running
 ```
-python main.py
+python main.py --mode=train
+python main.py --mode=test --load_from=/path/to/your/checkpoint/directory
 ```
-The recall rates will be displayed in the terminal.
+
 
 # Evaluate your own data
-Organize your own data following the description in [data.md](./data/data.md) and custom you dataloader in dataset.py. Then evaluate the performance with the script main.py
+Organize your own data following the description in [data.md](./data/data.md) and custom you dataloader following kitti_dataset.py. Then evaluate the performance with the script main.py
 
-# Results
+<!-- # Results
 Here are some experimental results on large-scale datasets.
 ### Recall rates on KITTI
 ![KITTI](imgs/KITTI.png)
@@ -29,9 +32,10 @@ Here are some experimental results on large-scale datasets.
 ![KITTI](imgs/benchmark_dataset.png)
 
 ### Some samples on KITTI
-![KITTI](imgs/samples.png)
+![KITTI](imgs/samples.png) -->
 
 # News
+- 2024-08-04: BEVPlace++ is released. Compared to BEVPlace, it achieves complete 3DoF global localization.
 - 2023-08-31: Update the pre-trained weights and the bev dataset of KITTI for reproducing the numbers in the paper. 
 - 2023-07-14: Our paper is accepted by ICCV 2023!
 - 2023-03-14: Intial version
