@@ -3,6 +3,13 @@ BEVPlace++ is a LiDAR-based global localization method. It projects point clouds
 
 > paper comming soon...
 
+# Results
+
+Loop results on KITTI 08.
+<video src="https://github.com/user-attachments/assets/a61b4d84-a220-40b9-add1-8473a05f46c5)
+https://github.com/user-attachments/assets/a61b4d84-a220-40b9-add1-8473a05f46c5"></video>
+
+
 # Quick Start
 
 1. Download the dataset from [google drive](https://drive.google.com/file/d/1-oNthUKg4ysrbZ_sEjiylON9w93KCUT5/view?usp=drive_link). Unzip and move the files into the "data" directory.
