@@ -1,6 +1,6 @@
 ### The data directory should be organized like this
 ```
-|-- data
+|-- datasets
 |   |-- KITTI             # dataset root path
 |   |   |-- 00            # sequence
 |   |   |   |-- bev_imgs      # bev images directory

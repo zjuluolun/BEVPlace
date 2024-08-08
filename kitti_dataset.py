@@ -238,7 +238,8 @@ class TrainingDataset(data.Dataset):
             dis_pos = np.sqrt(np.sum((q_feat.reshape(1,-1)-pos_feat)**2,axis=1))
 
             min_idx = np.where(dis_pos==np.max(dis_pos))[0][0] 
-            pos_idx = self.positives[index][min_idx]
+            pos_idx = np.random.choice(self.positives[index], 1)[0]#
+            # pos_idx = self.positives[index][min_idx]
 
             neg_feat = self.h5feat[self.negatives[index].tolist()]
             dis_neg = np.sqrt(np.sum((q_feat.reshape(1,-1)-neg_feat)**2,axis=1))
@@ -260,6 +261,7 @@ class TrainingDataset(data.Dataset):
         # rot augmentation
         mat = cv2.getRotationMatrix2D((query.shape[1]//2, query.shape[0]//2 ), np.random.randint(0,360), 1)
         query = cv2.warpAffine(query, mat, query.shape[:2])
+        
         query = query.transpose(2,0,1)
 
 

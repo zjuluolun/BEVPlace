@@ -359,7 +359,7 @@ if __name__ == "__main__":
                     'optimizer' : optimizer.state_dict(),
             }, is_best, logdir)
 
-        print('===> Best Recall: %0.2f'%(mean_recall))
+        print('===> Best Recall: %0.2f'%(mean_recall*100))
         writer.close()
 
     elif opt.mode.lower() == 'test':
