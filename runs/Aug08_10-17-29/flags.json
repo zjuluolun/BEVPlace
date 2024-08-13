@@ -1,0 +1,1 @@
+{"mode": "train", "batchSize": 4, "cacheBatchSize": 128, "nEpochs": 40, "nGPU": 2, "lr": 0.0001, "lrStep": 10, "lrGamma": 0.5, "weightDecay": 0.001, "momentum": 0.9, "threads": 24, "seed": 1024, "runsPath": "./runs/", "cachePath": "./cache/", "load_from": "", "ckpt": "best"}
