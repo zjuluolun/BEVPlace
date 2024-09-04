@@ -55,7 +55,7 @@ Here are some experimental results on large-scale datasets.
 
 # Cite
 ```
-@INPROCEEDINGS{luo_bevplace2023,
+@INPROCEEDINGS{luo2023bevplace,
   author={Luo, Lun and Zheng, Shuhang and Li, Yixuan and Fan, Yongzhi and Yu, Beinan and Cao, Si-Yuan and Li, Junwei and Shen, Hui-Liang},
   booktitle={2023 IEEE/CVF International Conference on Computer Vision (ICCV)}, 
   title={BEVPlace: Learning LiDAR-based Place Recognition using Bird’s Eye View Images}, 
