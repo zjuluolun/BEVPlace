@@ -32,7 +32,7 @@ python main.py --mode=test --load_from=/path/to/your/checkpoint/directory
 
 
 # Evaluate your own data
-Organize your own data following the description in [data.md](./data/data.md) and custom you dataloader following kitti_dataset.py. Then evaluate the performance with the script main.py
+Organize your data following the description in [data.md](./data/data.md) and customize your dataloader following kitti_dataset.py. Then evaluate the performance with the script main.py
 
 <!-- # Results
 Here are some experimental results on large-scale datasets.
@@ -50,11 +50,20 @@ Here are some experimental results on large-scale datasets.
 - 2024-08-04: BEVPlace++ is released. Compared to BEVPlace, it achieves complete 3DoF global localization.
 - 2023-08-31: Update the pre-trained weights and the bev dataset of KITTI to reproduce the numbers in the paper. 
 - 2023-07-14: Our paper is accepted by ICCV 2023!
-- 2023-03-14: Initial version
-- 2022-09-02: Our method ranked 2nd in the General Place Recognition Competition of ICRA 2022! (The 1st place solution is based on ensemble learning)
+- 2023-03-14: Initial version.
+- 2022-09-02: Our method ranked 2nd in the General Place Recognition Competition of ICRA 2022!
 
 # Cite
 ```
+@misc{luo2024bevplacefastrobustlightweight,
+      title={BEVPlace++: Fast, Robust, and Lightweight LiDAR Global Localization for Unmanned Ground Vehicles}, 
+      author={Lun Luo and Si-Yuan Cao and Xiaorui Li and Jintao Xu and Rui Ai and Zhu Yu and Xieyuanli Chen},
+      year={2024},
+      eprint={2408.01841},
+      archivePrefix={arXiv},
+      primaryClass={cs.RO},
+      url={https://arxiv.org/abs/2408.01841}, 
+}
 @INPROCEEDINGS{luo2023bevplace,
   author={Luo, Lun and Zheng, Shuhang and Li, Yixuan and Fan, Yongzhi and Yu, Beinan and Cao, Si-Yuan and Li, Junwei and Shen, Hui-Liang},
   booktitle={2023 IEEE/CVF International Conference on Computer Vision (ICCV)}, 
