@@ -153,23 +153,38 @@ def train_epoch(epoch, model, train_set):
             flush=True)
     writer.add_scalar('Train/AvgLoss', avg_loss, epoch)
 
-def infer(eval_set, return_local_feats = False):
-    test_data_loader = DataLoader(dataset=eval_set, 
-                num_workers=opt.threads, batch_size=opt.cacheBatchSize, shuffle=False)
+def infer(eval_set, return_local_feats=False, sample_rate=0.1):
+    test_data_loader = DataLoader(dataset=eval_set,
+                                  num_workers=opt.threads,
+                                  batch_size=opt.cacheBatchSize,
+                                  shuffle=False)
 
     model.eval()
     model.to('cuda')
     with torch.no_grad():
-        
+        # 初始化空列表
         all_global_descs = []
         all_local_feats = []
+
         for _, (imgs, _) in enumerate(tqdm(test_data_loader)):
             imgs = imgs.to(device)
-            _ , local_feat, global_desc = model(imgs)
+            # 从模型输出中提取全局描述符和局部特征
+            _, local_feat, global_desc = model(imgs)
+
+            # 将全局描述符添加到 all_global_descs 列表
             all_global_descs.append(global_desc.detach().cpu().numpy())
+
+            # 对 local_feats 进行采样并存储
             if return_local_feats:
-                all_local_feats.append(local_feat.detach().cpu().numpy())
-           
+                local_feat = local_feat.detach().cpu().numpy()
+                # 根据 sample_rate 进行特征采样
+                sampled_indices = np.random.choice(local_feat.shape[1],
+                                                   int(local_feat.shape[1] * sample_rate),
+                                                   replace=False)
+                sampled_local_feat = local_feat[:, sampled_indices, :]
+                all_local_feats.append(sampled_local_feat)
+
+    # 将 all_global_descs 和（可选的）采样后的 all_local_feats 拼接并返回
     if return_local_feats:
         return np.concatenate(all_local_feats, axis=0), np.concatenate(all_global_descs, axis=0)
     else:
@@ -367,15 +382,19 @@ if __name__ == "__main__":
         
         recalls_kitti = []
         print('====> Extracting Features of KITTI and calculating recalls')
-        eval_seq =  ['08']#, '02', '05', '06', '08']
+        eval_seq =  ['02', '05', '06', '08']
 
         for seq in eval_seq:   
 
             test_set = kitti_dataset.InferDataset(seq=seq)   
             if seq=='08':
-                local_feats, global_descs = infer(test_set, return_local_feats=True)  #return a very large local feature mat could be very slow
+                # local_feats, global_descs = infer(test_set, return_local_feats=True)  #return a very large local feature mat could be very slow
+                local_feats, global_descs = infer(test_set, return_local_feats=True, sample_rate=0.1)
                 recall_top1, success_rate, mean_trans_err, mean_rot_err = kitti_dataset.evaluateResults(seq, global_descs, local_feats, test_set, "out_imgs/")
             else:
+                # 添加
+                global_descs = infer(test_set)
+                local_feats = None
                 recall_top1 = kitti_dataset.evaluateResults(seq, global_descs, local_feats, test_set)
             recalls_kitti.append(recall_top1)
 
