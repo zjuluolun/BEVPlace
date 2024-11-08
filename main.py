@@ -370,12 +370,12 @@ if __name__ == "__main__":
         eval_seq =  ['08']#, '02', '05', '06', '08']
 
         for seq in eval_seq:   
-
-            test_set = kitti_dataset.InferDataset(seq=seq)   
             if seq=='08':
-                local_feats, global_descs = infer(test_set, return_local_feats=True)  #return a very large local feature mat could be very slow
+                test_set = kitti_dataset.InferDataset(seq=seq,sample_inteval=10)  #return a very large local feature mat could be very slow. sample the dataset to reduce ram and time cost
+                local_feats, global_descs = infer(test_set, return_local_feats=True)  
                 recall_top1, success_rate, mean_trans_err, mean_rot_err = kitti_dataset.evaluateResults(seq, global_descs, local_feats, test_set, "out_imgs/")
             else:
+                test_set = kitti_dataset.InferDataset(seq=seq)  
                 recall_top1 = kitti_dataset.evaluateResults(seq, global_descs, local_feats, test_set)
             recalls_kitti.append(recall_top1)
 
