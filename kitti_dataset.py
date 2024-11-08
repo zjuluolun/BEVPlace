@@ -14,16 +14,16 @@ from RANSAC import rigidRansac
 kitti_seq_split_points = {"00":3000, "02":3400, "05":1000, "06":600, '08':1000}
 
 class InferDataset(data.Dataset):
-    def __init__(self, seq, dataset_path = './datasets/KITTI/'):
+    def __init__(self, seq, dataset_path = './datasets/KITTI/',sample_inteval=1):
         super().__init__()
 
         # bev path
         imgs_p = os.listdir(dataset_path+seq+'/bev_imgs/')
         imgs_p.sort()
-        self.imgs_path = [dataset_path+seq+'/bev_imgs/'+i for i in imgs_p]
+        self.imgs_path = [dataset_path+seq+'/bev_imgs/'+imgs_p[i] for i in range(0,len(imgs_p), sample_inteval)]
 
         # gt_pose
-        self.poses = np.loadtxt(dataset_path+'poses/'+seq+'.txt')
+        self.poses = np.loadtxt(dataset_path+'poses/'+seq+'.txt')[::sample_inteval]
 
 
     def __getitem__(self, index):
