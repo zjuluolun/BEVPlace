@@ -17,6 +17,8 @@ class InferDataset(data.Dataset):
     def __init__(self, seq, dataset_path = './datasets/KITTI/',sample_inteval=1):
         super().__init__()
 
+        self.sample_inteval = sample_inteval
+        self.db_split_index = int(kitti_seq_split_points[seq]/sample_inteval)
         # bev path
         imgs_p = os.listdir(dataset_path+seq+'/bev_imgs/')
         imgs_p.sort()
@@ -51,18 +53,18 @@ def evaluateResults(seq, global_descs, local_feats, dataset, match_results_save_
 
     gt_thres = 5  # gt threshold
     faiss_index = faiss.IndexFlatL2(global_descs.shape[1]) 
-    faiss_index.add(global_descs[:kitti_seq_split_points[seq]])
+    faiss_index.add(global_descs[:dataset.db_split_index])
 
-    _, predictions = faiss_index.search(global_descs[kitti_seq_split_points[seq]+200:], 1)  #top1
+    _, predictions = faiss_index.search(global_descs[dataset.db_split_index+int(200/dataset.sample_inteval):], 1)  #top1
     
     
-    eval_start_split_point = kitti_seq_split_points[seq]+200  
+    eval_start_split_point = dataset.db_split_index+int(200/dataset.sample_inteval)
     all_positives = 0
     tp = 0
     for q_idx, pred in enumerate(predictions):
 
         query_idx = eval_start_split_point+q_idx
-        gt_dis = (dataset.poses[query_idx] - dataset.poses[:kitti_seq_split_points[seq]])**2
+        gt_dis = (dataset.poses[query_idx] - dataset.poses[:dataset.db_split_index])**2
         positives = np.where(np.sum(gt_dis[:,[3,7,11]],axis=1) < gt_thres**2 )[0]
         if len(positives)>0:
             all_positives+=1

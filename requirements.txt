@@ -5,3 +5,6 @@ scikit-image
 scikit-learn
 tqdm
 argparse
+h5py
+tensorboardX
+imgaug

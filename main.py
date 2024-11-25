@@ -26,7 +26,7 @@ import faiss
 import kitti_dataset
 import nclt_dataset 
 
-os.environ['CUDA_VISIBLE_DEVICES'] = '4'
+#os.environ['CUDA_VISIBLE_DEVICES'] = '4'
 
 def get_args():
     parser = argparse.ArgumentParser(description='BEVPlace++')
@@ -51,7 +51,7 @@ def get_args():
     parser.add_argument('--cachePath', type=str, default='./cache/', help='Path to save cache to.')
 
 
-    parser.add_argument('--load_from', type=str, default='', help='Path to load checkpoint from, for resuming training or testing.')
+    parser.add_argument('--load_from', type=str, default='runs/Aug08_10-17-29', help='Path to load checkpoint from, for resuming training or testing.')
     parser.add_argument('--ckpt', type=str, default='best', 
             help='Load_from from latest or best checkpoint.', choices=['latest', 'best'])
     
@@ -371,7 +371,7 @@ if __name__ == "__main__":
 
         for seq in eval_seq:   
             if seq=='08':
-                test_set = kitti_dataset.InferDataset(seq=seq,sample_inteval=10)  #return a very large local feature mat could be very slow. sample the dataset to reduce ram and time cost
+                test_set = kitti_dataset.InferDataset(seq=seq,sample_inteval=5)  #return a very large local feature mat could be very slow. sample the dataset to reduce ram and time cost
                 local_feats, global_descs = infer(test_set, return_local_feats=True)  
                 recall_top1, success_rate, mean_trans_err, mean_rot_err = kitti_dataset.evaluateResults(seq, global_descs, local_feats, test_set, "out_imgs/")
             else:
